@@ -14,104 +14,132 @@ import javax.swing.JOptionPane;
  */
 public class LabCircular extends javax.swing.JFrame {
 
-    DefaultListModel model1 ;
-    DefaultListModel model2 ;
-    
+    DefaultListModel model1;
+    DefaultListModel model2;
+
     public LabCircular() {
         initComponents();
         model1 = new DefaultListModel();
         lista1.setModel(model1);
-        
+
         model2 = new DefaultListModel();
         lista2.setModel(model2);
-        ptr=null;
-        ptr2=null;
+        ptr = null;
+        ptr2 = null;
     }
-    class Nodo{
+
+    class Nodo {
+
         int num;
         Nodo link;
+
+        public Nodo() {
+        }
+
+        public Nodo(int num) {
+            this.num = num;
+        }
     }
     Nodo ptr;
     Nodo ptr2;
-    Nodo ult=null;
-    Nodo ult2=null;
-    public Nodo addNodoCircular(Nodo ptr,int nume){
+    Nodo ult = null;
+    Nodo ult2 = null;
+
+    public Nodo addNodoCircular(Nodo ptr, int nume) {
         Nodo q = new Nodo();
-        q.num=nume;
-        if(ptr==null){
-            ptr=q;
-            ult=q;
-        }else{
-            ult.link=q;
-            ult=q;  
+        q.num = nume;
+        if (ptr == null) {
+            ptr = q;
+            ult = q;
+        } else {
+            ult.link = q;
+            ult = q;
         }
-        q.link=ptr;
+        q.link = ptr;
         return ptr;
     }
-    public Nodo addNodoSimple(Nodo ptr2,int nume){
+
+    public Nodo addNodoSimple(Nodo ptr2, int nume) {
         Nodo q = new Nodo();
-        q.num=nume;
+        q.num = nume;
         Nodo p = ptr2;
-        if(ptr2==null){
-            ptr2=q;
-            ult2=q;
-        }else{
-            ult2.link=q;
-            ult2=q;  
+        if (ptr2 == null) {
+            ptr2 = q;
+            ult2 = q;
+        } else {
+            ult2.link = q;
+            ult2 = q;
         }
         return ptr2;
     }
-    public void showList(Nodo ptr){
-       DefaultListModel model = (DefaultListModel) lista1.getModel() ;
-       model.clear();
-       Nodo p = ptr;
-       do{
-           model.addElement(p.num);
-           p=p.link;
-       }while(p!=ptr);
-       NodoC.setText("");
-        
+
+    public void showList(Nodo ptr) {
+        DefaultListModel model = (DefaultListModel) lista1.getModel();
+        model.clear();
+        Nodo p = ptr;
+        do {
+            model.addElement(p.num);
+            p = p.link;
+        } while (p != ptr);
+        NodoC.setText("");
+
     }
-     public void showList2(Nodo ptr2){
-       DefaultListModel model = (DefaultListModel) lista2.getModel() ;
-       model.clear();
-       Nodo p = ptr2;
-       while(p!=null){
-           model.addElement(p.num);
-           p=p.link;
-       }
-       NodoS.setText("");
-        
+
+    public void showList2(Nodo ptr2) {
+        DefaultListModel model = (DefaultListModel) lista2.getModel();
+        model.clear();
+        Nodo p = ptr2;
+        while (p != null) {
+            model.addElement(p.num);
+            p = p.link;
+        }
+        NodoS.setText("");
+
     }
-    Nodo getUltimoSimple(Nodo ptr2){
-        Nodo ultimoS=ptr2;
-        while(ultimoS.link!=null){
-            ultimoS=ultimoS.link;
+
+    Nodo getUltimoSimple(Nodo ptr2) {
+        Nodo ultimoS = ptr2;
+        while (ultimoS.link != null) {
+            ultimoS = ultimoS.link;
         }
         return ultimoS;
     }
-    Nodo getUltimoCircular(Nodo ptr){
-        Nodo ultimoC=ptr;
-        while(ultimoC.link!=ptr){
-            ultimoC=ultimoC.link;
+
+    Nodo getUltimoCircular(Nodo ptr) {
+        Nodo ultimoC = ptr;
+        while (ultimoC.link != ptr) {
+            ultimoC = ultimoC.link;
         }
-       
+
         return ultimoC;
     }
-    int getNumeroUltimo(Nodo ptr){
-        int cont=0;
-        Nodo p=ptr;
-        while(p.link!=ptr){
+
+    int getNumeroUltimo(Nodo ptr) {
+        int cont = 0;
+        Nodo p = ptr;
+        while (p.link != ptr) {
             cont++;
-            p=p.link;
+            p = p.link;
         }
-        
+
         return cont;
     }
     
-    
+    //Se crea una lista totalmente nueva, con la misma información de la que se paso como parametro
+    public Nodo copiarLista(Nodo simple) {
+        Nodo copia = new Nodo();
+        copia.num = simple.num;
+        Nodo p = copia;
 
-   
+        while (simple.link != null) {
+            simple = simple.link;
+            p.link = new Nodo(simple.num);
+            p = p.link;
+        }
+
+        return copia;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -247,10 +275,10 @@ public class LabCircular extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-        if(!(NodoC.getText().isEmpty())){
-            int  nodoc=Integer.parseInt(NodoC.getText());
-            ptr=addNodoCircular(ptr,nodoc);
+
+        if (!(NodoC.getText().isEmpty())) {
+            int nodoc = Integer.parseInt(NodoC.getText());
+            ptr = addNodoCircular(ptr, nodoc);
             showList(ptr);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -260,48 +288,50 @@ public class LabCircular extends javax.swing.JFrame {
     }//GEN-LAST:event_posActionPerformed
 
     private void NodoCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NodoCActionPerformed
-        
+
     }//GEN-LAST:event_NodoCActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(!(NodoS.getText().isEmpty())){
-            int  nodos=Integer.parseInt(NodoS.getText());
-            ptr2=addNodoSimple(ptr2,nodos);
+        if (!(NodoS.getText().isEmpty())) {
+            int nodos = Integer.parseInt(NodoS.getText());
+            ptr2 = addNodoSimple(ptr2, nodos);
             showList2(ptr2);
-        }        
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if(!(pos.getText().isEmpty())){
-             int posi=Integer.parseInt(pos.getText());
-             Nodo ultimoc=  getUltimoCircular(ptr);
-             Nodo ultimos=  getUltimoSimple(ptr2);
-            int cont=1;
-            Nodo p=ptr;
-            Nodo antp=null;
-            while(p.link!=ptr&&cont!=posi){
+        if (!(pos.getText().isEmpty())) {
+            int posi = Integer.parseInt(pos.getText());
+            Nodo ultimoc = getUltimoCircular(ptr);
+
+            int cont = 1;
+            Nodo p = ptr;
+            Nodo antp = null;
+
+            while (p.link != ptr && cont != posi) {
                 cont++;
-                antp=p;
-                p=p.link;
+                antp = p;
+                p = p.link;
             }
-            if(cont==posi){
-                
-                if(cont==1){
-              ultimoc.link=ptr2;
-              ultimos.link=ptr; 
-              ptr=ptr2;
-                }else if(cont>1&&p.link!=ptr){
-                    ultimos.link=antp.link;
-                    antp.link=ptr2;
-                  
-                }else{
-                   ultimos.link=ptr;
-                   p.link=ptr2;
+
+            if (cont == posi) {
+                Nodo copia = copiarLista(ptr2);
+                Nodo ultimos = getUltimoSimple(copia);
+                if (cont == 1) {
+                    ultimoc.link = copia;
+                    ultimos.link = ptr;
+                    ptr = copia;
+                } else if (cont > 1 && p.link != ptr) {
+                    ultimos.link = p;
+                    antp.link = copia;
+                } else {
+                    ultimos.link = ptr;
+                    p.link = copia;
                 }
-            }else{
-                JOptionPane.showMessageDialog(null,"No se enceuntra esa posicion");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se enceuntra esa posicion");
             }
-            
+
         }
         showList(ptr);
         pos.setText("");
