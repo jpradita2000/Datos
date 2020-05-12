@@ -274,25 +274,25 @@ public class LabCircular extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if(!(pos.getText().isEmpty())){
              int posi=Integer.parseInt(pos.getText());
-//             if(posi==1){
              Nodo ultimoc=  getUltimoCircular(ptr);
              Nodo ultimos=  getUltimoSimple(ptr2);
-            
             int cont=1;
             Nodo p=ptr;
+            Nodo antp=null;
             while(p.link!=ptr&&cont!=posi){
                 cont++;
+                antp=p;
                 p=p.link;
             }
             if(cont==posi){
-                cont=cont-1;
-                if(posi==1){
+                
+                if(cont==1){
               ultimoc.link=ptr2;
               ultimos.link=ptr; 
               ptr=ptr2;
                 }else if(cont>1&&p.link!=ptr){
-                    ultimos.link=p.link;
-                    p.link=ptr2;
+                    ultimos.link=antp.link;
+                    antp.link=ptr2;
                   
                 }else{
                    ultimos.link=ptr;
