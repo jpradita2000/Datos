@@ -339,7 +339,8 @@ public class LabCircular extends javax.swing.JFrame {
 
         }
         showList(ptr);
-        
+        ptr2 = null;
+        showList2(ptr2);
         
         pos.setText("");
     }//GEN-LAST:event_jButton3ActionPerformed
