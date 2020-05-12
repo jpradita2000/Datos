@@ -94,6 +94,7 @@ public class LabCircular extends javax.swing.JFrame {
             p = p.link;
         }
         NodoS.setText("");
+        
 
     }
 
@@ -139,6 +140,7 @@ public class LabCircular extends javax.swing.JFrame {
 
         return copia;
     }
+  
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -324,16 +326,21 @@ public class LabCircular extends javax.swing.JFrame {
                 } else if (cont > 1 && p.link != ptr) {
                     ultimos.link = p;
                     antp.link = copia;
-                } else {
-                    ultimos.link = ptr;
-                    p.link = copia;
                 }
-            } else {
+            } else if(posi-1==cont) {
+                Nodo copia = copiarLista(ptr2);
+                Nodo ultimos = getUltimoSimple(copia);
+                 ultimos.link = ptr;
+                 p.link = copia;
+            }else{
                 JOptionPane.showMessageDialog(null, "No se enceuntra esa posicion");
             }
+            
 
         }
         showList(ptr);
+        
+        
         pos.setText("");
     }//GEN-LAST:event_jButton3ActionPerformed
 
